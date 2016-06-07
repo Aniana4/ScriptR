@@ -1,0 +1,36 @@
+---
+title: "RMD_divide_table"
+author: "Montse Figueiro"
+date: "7 de junio de 2016"
+output:
+  md_document:
+    variant: markdown_github
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##Dividir Tablas
+Vamos a dividir la tabla iris en dos tablas de manera que aleatoriamente cada tabla tenga las mismas observaciones de "Species".
+
+```{r,message=FALSE,warning=FALSE}
+library(plyr)
+library(data.table)
+mi.iris <- iris
+mi.iris <- data.table(mi.iris)
+head(mi.iris)
+library(dplyr)
+  partido <- mi.iris %>%  #parte por grupos
+  group_by(Species)%>%sample_n((length(mi.iris$Species)/2)/(length(unique(mi.iris$Species))),replace=FALSE)
+summary(partido)
+dim(partido)
+head(partido)
+partidocompl <- setdiff(mi.iris,partido)
+head(partidocompl)
+```
+```{r}
+sum(iris$Sepal.Length)#876.5
+sum(partido$Sepal.Length)#447.4
+sum(partidocompl$Sepal.Length)#429.1
+```
