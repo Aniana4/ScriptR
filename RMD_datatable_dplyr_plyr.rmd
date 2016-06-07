@@ -2,7 +2,9 @@
 title: "data.Table/dplyr/plyr"
 author: "Montse Figueiro"
 date: "7 de junio de 2016"
-output: word_document
+output:
+  md_document:
+    variant: markdown_github
 ---
 
 ```{r setup, include=FALSE}
